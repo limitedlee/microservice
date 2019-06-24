@@ -3,15 +3,15 @@ package consul
 import (
 	"fmt"
 	consulApi "github.com/hashicorp/consul/api"
+	"github.com/limitedlee/microservice/common"
 	"log"
-	"github.com/LimitedLee/microservice/common"
 	"strconv"
 	"strings"
 )
 
 func RegisterService(sysConfig *common.SystemConfig) {
 	config := consulApi.DefaultConfig()
-	config.Address=sysConfig.ServiceDiscoveryAddress
+	config.Address = sysConfig.ServiceDiscoveryAddress
 
 	client, err := consulApi.NewClient(config)
 	if err != nil {
@@ -22,18 +22,18 @@ func RegisterService(sysConfig *common.SystemConfig) {
 	port, _ := strconv.Atoi(strings.Split(sysConfig.LocalAddress, ":")[1])
 
 	registration := new(consulApi.AgentServiceRegistration)
-	registration.ID = sysConfig.Name + "-" + strings.ReplaceAll(sysConfig.LocalAddress,":","-")
+	registration.ID = sysConfig.Name + "-" + strings.ReplaceAll(sysConfig.LocalAddress, ":", "-")
 	registration.Name = sysConfig.Name
 	registration.Address = ip
 	registration.Port = port
-	registration.Check=&consulApi.AgentServiceCheck{
-		DeregisterCriticalServiceAfter:"5s",
-		HTTP:fmt.Sprintf("http://%s/health",sysConfig.LocalAddress),
-		Interval:"2s",
-		Timeout:"1s"}
+	registration.Check = &consulApi.AgentServiceCheck{
+		DeregisterCriticalServiceAfter: "5s",
+		HTTP:                           fmt.Sprintf("http://%s/health", sysConfig.LocalAddress),
+		Interval:                       "2s",
+		Timeout:                        "1s"}
 
-	registration.Tags=make([]string,1)
-	registration.Tags[0]=sysConfig.DisplayName
+	registration.Tags = make([]string, 1)
+	registration.Tags[0] = sysConfig.DisplayName
 
 	err = client.Agent().ServiceRegister(registration)
 	if err != nil {
