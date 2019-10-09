@@ -12,6 +12,9 @@ import (
 )
 
 type Microservice struct {
+	Test struct{
+		Name string
+	}
 	Service struct {
 		//服务英文名
 		Name string
