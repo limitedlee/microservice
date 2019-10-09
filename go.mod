@@ -10,5 +10,6 @@ require (
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/hashicorp/consul/api v1.1.0
 	github.com/maybgit/golog v0.0.0-20191009072626-ce236cbe5d0d
+	golang.org/x/sys v0.0.0-20190602015325-4c4f7f33c9ed
 	google.golang.org/grpc v1.24.0
 )

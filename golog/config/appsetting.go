@@ -18,5 +18,6 @@ func init() {
 type AppSetting struct {
 	Grpc struct {
 		Address string
+		Appid   string
 	}
 }
