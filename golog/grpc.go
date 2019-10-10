@@ -13,8 +13,6 @@ import (
 )
 
 var client proto.LogClient
-var ctx context.Context
-var cancel context.CancelFunc
 
 func init() {
 	defer func() {
@@ -29,7 +27,6 @@ func init() {
 	}
 	//defer conn.Close()
 	client = proto.NewLogClient(conn)
-	ctx, cancel = context.WithTimeout(context.Background(), time.Second*5)
 }
 
 func Error(in ...interface{}) {
@@ -46,7 +43,6 @@ func Error(in ...interface{}) {
 	f2 := runtime.FuncForPC(pc2)
 
 	writeLog(fmt.Sprintf("%v => %v", f.Name(), f2.Name()), "ERROR", in)
-
 }
 
 func Info(in ...interface{}) {
@@ -95,44 +91,47 @@ func Warn(in ...interface{}) {
 }
 
 func writeLog(logger string, level string, in []interface{}) {
+	go func() {
+		defer func() {
+			if err := recover(); err != nil {
+				log.Println(err)
+			}
+		}()
 
-	defer func() {
-		if err := recover(); err != nil {
-			log.Println(err)
+		m := proto.LogRequest{}
+		m.Logger = logger
+		m.Appid = config.App.Grpc.Appid
+
+		for _, v := range in {
+			switch v.(type) {
+			case string:
+				m.Message += v.(string)
+			case runtime.Error:
+				m.Exception = v.(runtime.Error).Error()
+			case error:
+				m.Exception = v.(error).Error()
+			default:
+				m.Exception = fmt.Sprintf("%T - ", v) + fmt.Sprintf("%v", v)
+			}
 		}
+
+		ctx, _ := context.WithTimeout(context.Background(), time.Second*60)
+
+		var r *proto.Reply
+		var err2 error
+		switch level {
+		case "ERROR":
+			r, err2 = client.Error(ctx, &m)
+		case "INFO":
+			r, err2 = client.Info(ctx, &m)
+		case "WARN":
+			r, err2 = client.Warn(ctx, &m)
+		case "FATAL":
+			r, err2 = client.Fatal(ctx, &m)
+		}
+		if err2 != nil {
+			log.Fatalf("could not greet: %v", err2)
+		}
+		log.Println(r)
 	}()
-
-	m := proto.LogRequest{}
-	m.Logger = logger
-	m.Appid = config.App.Grpc.Appid
-
-	for _, v := range in {
-		switch v.(type) {
-		case string:
-			m.Message += v.(string)
-		case runtime.Error:
-			m.Exception = v.(runtime.Error).Error()
-		case error:
-			m.Exception = v.(error).Error()
-		default:
-			m.Exception = fmt.Sprintf("%T - ", v) + fmt.Sprintf("%v", v)
-		}
-	}
-
-	var r *proto.Reply
-	var err2 error
-	switch level {
-	case "ERROR":
-		r, err2 = client.Error(ctx, &m)
-	case "INFO":
-		r, err2 = client.Info(ctx, &m)
-	case "WARN":
-		r, err2 = client.Warn(ctx, &m)
-	case "FATAL":
-		r, err2 = client.Fatal(ctx, &m)
-	}
-	if err2 != nil {
-		log.Fatalf("could not greet: %v", err2)
-	}
-	log.Println(r)
 }
