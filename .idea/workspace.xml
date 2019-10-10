@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="60b41cd3-f443-4aa3-9d44-5b7c7ca2ac98" name="Default Changelist" comment="优化系统">
-      <change afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/appsetting.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/appconfig.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="60b41cd3-f443-4aa3-9d44-5b7c7ca2ac98" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/golog/config/appsetting.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/golog/config/appsetting.toml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/golog/grpc.go" beforeDir="false" afterPath="$PROJECT_DIR$/golog/grpc.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/golog/proto/log.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/log.pb.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +28,7 @@
   </component>
   <component name="GOROOT" path="D:\Go" />
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GoLibraries">
@@ -129,7 +121,8 @@
     <MESSAGE value="11111" />
     <MESSAGE value="优化命名空间" />
     <MESSAGE value="优化系统" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化系统" />
+    <MESSAGE value="添加grpc功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加grpc功能" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
