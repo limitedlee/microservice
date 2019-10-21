@@ -42,3 +42,8 @@ func Get(key string) (string, error) {
 	}
 	return tr.Data, err
 }
+
+func GetString(key string) string {
+	str, _ := Get(key)
+	return str
+}
