@@ -131,6 +131,6 @@ func writeLog(logger string, level string, in []interface{}) {
 		if err2 != nil {
 			log.Fatalf("could not greet: %v", err2)
 		}
-		log.Println(r)
+		log.Printf("[gRPC-LogService] %v\t%+v",r,m)
 	}()
 }
