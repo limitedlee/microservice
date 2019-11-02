@@ -135,7 +135,8 @@ func writeLog(logger string, level string, in []interface{}) (r *Reply) {
 
 		if err != nil {
 			log.Printf("%v\n", err)
-			time.Sleep(time.Second * 3)
+			break
+			//time.Sleep(time.Second * 3)
 		} else {
 			break
 		}
