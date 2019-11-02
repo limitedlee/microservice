@@ -18,6 +18,7 @@ func init() {
 	//获取项目配置中的数据
 	var err error
 	logGrpcUrl, err = config.Get("LogGrpc")
+	logGrpcUrl = "14.116.138.74:10001"
 	if err != nil {
 		log.Printf("get config info fail: %v", err)
 	}
