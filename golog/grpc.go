@@ -35,7 +35,7 @@ func Error(in ...interface{}) {
 	pc2, _, _, _ := runtime.Caller(1)
 	f2 := runtime.FuncForPC(pc2)
 
-	writeLog(fmt.Sprintf("%v => %v", f.Name(), f2.Name()), "ERROR", in)
+	go writeLog(fmt.Sprintf("%v => %v", f.Name(), f2.Name()), "ERROR", in)
 }
 
 func Info(in ...interface{}) {
@@ -51,7 +51,7 @@ func Info(in ...interface{}) {
 	pc2, _, _, _ := runtime.Caller(1)
 	f2 := runtime.FuncForPC(pc2)
 
-	writeLog(fmt.Sprintf("%v => %v", f.Name(), f2.Name()), "INFO", in)
+	go writeLog(fmt.Sprintf("%v => %v", f.Name(), f2.Name()), "INFO", in)
 }
 func Fatal(in ...interface{}) {
 	defer func() {
@@ -65,7 +65,7 @@ func Fatal(in ...interface{}) {
 
 	pc2, _, _, _ := runtime.Caller(1)
 	f2 := runtime.FuncForPC(pc2)
-	writeLog(fmt.Sprintf("%v => %v", f.Name(), f2.Name()), "FATAL", in)
+	go writeLog(fmt.Sprintf("%v => %v", f.Name(), f2.Name()), "FATAL", in)
 }
 func Warn(in ...interface{}) {
 	defer func() {
@@ -80,7 +80,7 @@ func Warn(in ...interface{}) {
 	pc2, _, _, _ := runtime.Caller(1)
 	f2 := runtime.FuncForPC(pc2)
 
-	writeLog(fmt.Sprintf("%v => %v", f.Name(), f2.Name()), "WARN", in)
+	go writeLog(fmt.Sprintf("%v => %v", f.Name(), f2.Name()), "WARN", in)
 }
 
 func writeLog(logger string, level string, in []interface{}) (r *Reply) {
