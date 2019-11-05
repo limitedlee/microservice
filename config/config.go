@@ -44,6 +44,9 @@ func Get(key string) (string, error) {
 }
 
 func GetString(key string) string {
-	str, _ := Get(key)
+	str, err := Get(key)
+	if err != nil {
+		log.Println("读取配置出错 "，err)
+	}
 	return str
 }
