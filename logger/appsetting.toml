@@ -1,0 +1,3 @@
+[Grpc]
+Address="10.1.1.248:10000"
+Appid="goreport"

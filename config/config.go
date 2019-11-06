@@ -25,8 +25,9 @@ func init() {
 func Get(key string) (string, error) {
 	envName := os.Getenv("ASPNETCORE_ENVIRONMENT")
 	fmt.Println("环境变量值", envName)
-	//传递的key格式为EnvId:AppId:KV
+	//传递的key格式为AppId:EnId:KV
 	key = fmt.Sprintf("%s:%s:%s", envName, model.PbConfig.Grpc.Appid, key)
+	log.Println(key)
 
 	// 调用gRPC接口
 	var param proto.Params
@@ -41,4 +42,12 @@ func Get(key string) (string, error) {
 		log.Fatalf("get config info Unmarshal fail : %v", err)
 	}
 	return tr.Data, err
+}
+
+func GetString(key string) string {
+	str, err := Get(key)
+	if err != nil {
+		log.Println("读取配置出错 ",err)
+	}
+	return str
 }
