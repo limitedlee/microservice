@@ -9,5 +9,6 @@ require (
 	github.com/golang/protobuf v1.3.2
 	github.com/hashicorp/consul/api v1.1.0
 	github.com/maybgit/golog v0.0.0-20191009072626-ce236cbe5d0d
+	golang.org/x/net v0.0.0-20190603091049-60506f45cf65
 	google.golang.org/grpc v1.24.0
 )
