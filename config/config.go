@@ -25,7 +25,7 @@ func init() {
 func Get(key string) (string, error) {
 	envName := os.Getenv("ASPNETCORE_ENVIRONMENT")
 	fmt.Println("环境变量值", envName)
-	//传递的key格式为AppId:EnId:KV
+	//传递的key格式为EnvId:AppId:KV
 	key = fmt.Sprintf("%s:%s:%s", envName, model.PbConfig.Grpc.Appid, key)
 
 	// 调用gRPC接口
