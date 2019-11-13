@@ -3,12 +3,12 @@ package logger
 import (
 	"context"
 	"fmt"
+	"github.com/limitedlee/microservice/common"
 	"log"
 	"runtime"
 	"time"
 
-	"github.com/limitedlee/microservice/config"
-	"github.com/limitedlee/microservice/model"
+	"github.com/limitedlee/microservice/common/config"
 	"google.golang.org/grpc"
 )
 
@@ -18,7 +18,6 @@ func init() {
 	//获取项目配置中的数据
 	var err error
 	logGrpcUrl, err = config.Get("LogGrpc")
-	logGrpcUrl = "14.116.138.74:10001"
 	if err != nil {
 		log.Printf("get config info fail: %v", err)
 	}
@@ -106,7 +105,7 @@ func writeLog(logger string, level string, in []interface{}) (r *Reply) {
 
 			m := LogRequest{}
 			m.Logger = logger
-			m.Appid = model.PbConfig.Grpc.Appid
+			m.Appid = common.PbConfig.Grpc.Appid
 
 			for _, v := range in {
 				switch v.(type) {

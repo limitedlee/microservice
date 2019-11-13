@@ -3,22 +3,21 @@ package config
 import (
 	"context"
 	"fmt"
-	"github.com/limitedlee/microservice/model"
-	"github.com/limitedlee/microservice/proto"
+	"github.com/limitedlee/microservice/common"
 	"google.golang.org/grpc"
 	"log"
 	"os"
 )
 
-var client proto.AppconfigClient
+var client AppconfigClient
 
 func init() {
-	conn, err := grpc.Dial(model.PbConfig.Grpc.Address, grpc.WithInsecure())
+	conn, err := grpc.Dial(common.PbConfig.Grpc.Address, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
 	//defer conn.Close()
-	client = proto.NewAppconfigClient(conn)
+	client = NewAppconfigClient(conn)
 }
 
 //根据key获取配置信息
@@ -26,11 +25,11 @@ func Get(key string) (string, error) {
 	envName := os.Getenv("ASPNETCORE_ENVIRONMENT")
 	fmt.Println("环境变量值", envName)
 	//传递的key格式为AppId:EnId:KV
-	key = fmt.Sprintf("%s:%s:%s", envName, model.PbConfig.Grpc.Appid, key)
+	key = fmt.Sprintf("%s:%s:%s", envName, common.PbConfig.Grpc.Appid, key)
 	log.Println(key)
 
 	// 调用gRPC接口
-	var param proto.Params
+	var param Params
 	param.Keys = key
 
 	tr, err := client.GetAppConfig(context.Background(), &param)
@@ -47,7 +46,7 @@ func Get(key string) (string, error) {
 func GetString(key string) string {
 	str, err := Get(key)
 	if err != nil {
-		log.Println("读取配置出错 ",err)
+		log.Println("读取配置出错 ", err)
 	}
 	return str
 }

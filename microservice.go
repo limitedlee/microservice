@@ -1,10 +1,17 @@
 package main
 
 import (
+	"context"
+	"crypto/rsa"
 	"fmt"
+	"github.com/dgrijalva/jwt-go"
+	jw "github.com/limitedlee/microservice/common/jwt"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/metadata"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -14,13 +21,13 @@ type MicService struct {
 }
 
 func (m *MicService) NewServer() {
-	m.GrpcServer = grpc.NewServer()
+	m.GrpcServer = grpc.NewServer(grpc.UnaryInterceptor(filter))
 }
 
 func (m *MicService) Start() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "ok")
+		w.Write([]byte("ok"))
 	})
 	http.ListenAndServe("127.0.0.1:8888", grpcHandleFunc(m.GrpcServer, mux))
 }
@@ -33,4 +40,47 @@ func grpcHandleFunc(grpcServer *grpc.Server, otherHander http.Handler) http.Hand
 			otherHander.ServeHTTP(w, r)
 		}
 	}), &http2.Server{})
+}
+
+func filter(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
+
+	defer func() {
+		if r := recover(); r != nil {
+			err = fmt.Errorf("panic: %v", r)
+		}
+	}()
+
+	md, ok := metadata.FromIncomingContext(ctx)
+	if !ok {
+		return nil, grpc.Errorf(codes.Unauthenticated, "valid token required.")
+	}
+	jwtToken, ok := md["authorization"]
+
+	fmt.Println("auth:", jwtToken)
+	if !ok {
+		return nil, grpc.Errorf(codes.Unauthenticated, "valid token required.")
+	}
+
+	token, err := validateToken(jwtToken[0], jw.PublicKey)
+	if err != nil {
+		return nil, grpc.Errorf(codes.Unauthenticated, "valid token required.")
+	}
+
+	fmt.Println(token)
+
+	return handler(ctx, req)
+}
+
+func validateToken(token string, publicKey *rsa.PublicKey) (*jwt.Token, error) {
+	jwtToken, err := jwt.Parse(token, func(t *jwt.Token) (interface{}, error) {
+		if _, ok := t.Method.(*jwt.SigningMethodRSA); !ok {
+			log.Printf("Unexpected signing method: %v", t.Header["alg"])
+			return nil, fmt.Errorf("invalid token")
+		}
+		return publicKey, nil
+	})
+	if err == nil && jwtToken.Valid {
+		return jwtToken, nil
+	}
+	return nil, err
 }

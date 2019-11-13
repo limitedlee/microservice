@@ -3,7 +3,7 @@
 
 // 定义包名
 
-package proto
+package config
 
 import (
 	context "context"
