@@ -5,9 +5,9 @@ import (
 	"log"
 )
 
-var PbConfig config
+var PbConfig SysConfig
 
-type config struct {
+type SysConfig struct {
 	Grpc struct {
 		Appid   string //項目id
 		Address string //配置服務的grpc地址

@@ -2,19 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60b41cd3-f443-4aa3-9d44-5b7c7ca2ac98" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/common/jwt/jwt.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/proto/user.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/proto/user.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/servers/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/servers/userservice.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/microservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/microservice.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appsetting.toml" beforeDir="false" afterPath="$PROJECT_DIR$/appsetting.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logger/appsetting.toml" beforeDir="false" afterPath="$PROJECT_DIR$/common/logger/appsetting.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logger/grpc.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/logger/grpc.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logger/grpc_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/logger/grpc_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logger/log.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/logger/log.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservice.go" beforeDir="false" afterPath="$PROJECT_DIR$/microservice.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/appsetting.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/appsetting.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/appconfig.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/config/appconfig.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rsa/rsa.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/appsetting.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/appsetting.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice.go" beforeDir="false" afterPath="$PROJECT_DIR$/micro/microservice.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,21 +58,21 @@
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="D:/golang/ServiceDemo" />
+    <property name="last_opened_file_path" value="D:/golang/Gateway" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="go.sdk" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\ProjectMgr\GoProject\microservice\proto" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\xm\Desktop\microservice\micro" />
       <recent name="C:\Users\xm\Desktop\microservice\common" />
       <recent name="C:\Users\xm\Desktop\microservice\common\config" />
       <recent name="E:\ProjectMgr\GoProject\microservice" />
       <recent name="C:\Users\Lee\Desktop\work\microservice\jwt" />
-      <recent name="C:\Users\Lee\Desktop\work\microservice" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\ProjectMgr\GoProject\microservice\proto" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -135,7 +131,8 @@
     <MESSAGE value="优化命名空间" />
     <MESSAGE value="优化系统" />
     <MESSAGE value="添加grpc功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加grpc功能" />
+    <MESSAGE value="优化代码结构" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化代码结构" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

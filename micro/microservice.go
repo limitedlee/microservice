@@ -1,4 +1,4 @@
-package main
+package micro
 
 import (
 	"context"
@@ -11,8 +11,10 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/status"
 	"log"
 	"net/http"
+	"runtime/debug"
 	"strings"
 )
 
@@ -43,10 +45,10 @@ func grpcHandleFunc(grpcServer *grpc.Server, otherHander http.Handler) http.Hand
 }
 
 func filter(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
-
 	defer func() {
-		if r := recover(); r != nil {
-			err = fmt.Errorf("panic: %v", r)
+		if e := recover(); e != nil {
+			debug.PrintStack()
+			err = status.Errorf(codes.Internal, "Panic err: %v", e)
 		}
 	}()
 
