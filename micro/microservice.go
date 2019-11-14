@@ -64,17 +64,20 @@ func filter(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, ha
 	}
 	jwtToken, ok := md["authorization"]
 
-	fmt.Println("auth:", jwtToken)
-	if !ok {
-		return nil, grpc.Errorf(codes.Unauthenticated, "valid token required.")
-	}
+	if jwtToken != nil {
+		if !ok {
+			return nil, grpc.Errorf(codes.Unauthenticated, "valid token required.")
+		}
 
-	token, err := validateToken(jwtToken[0], jw.PublicKey)
-	if err != nil {
-		return nil, grpc.Errorf(codes.Unauthenticated, "valid token required.")
-	}
+		index := strings.Index(jwtToken[0], " ")
+		count := strings.Count(jwtToken[0], "")
+		token := jwtToken[0][index+1 : count-1]
 
-	fmt.Println(token)
+		_, err := validateToken(token, jw.PublicKey)
+		if err != nil {
+			return nil, grpc.Errorf(codes.Unauthenticated, fmt.Sprintf("valid token required.%v", err))
+		}
+	}
 
 	return handler(ctx, req)
 }

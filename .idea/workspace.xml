@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="60b41cd3-f443-4aa3-9d44-5b7c7ca2ac98" name="Default Changelist" comment="修改grpc监听端口">
+    <list default="true" id="60b41cd3-f443-4aa3-9d44-5b7c7ca2ac98" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/example/service/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/service/rsa_1024_priv.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/service/rsa_1024_pub.pem" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appsetting.toml" beforeDir="false" afterPath="$PROJECT_DIR$/example/service/appsetting.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/servers/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/servers/userservice.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/proto/userserviceimpl.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/micro/microservice.go" beforeDir="false" afterPath="$PROJECT_DIR$/micro/microservice.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,15 +24,6 @@
         <option value="Go File" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>:</find>
-      <find>cycle</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>=</replace>
-    </replaceStrings>
   </component>
   <component name="GOROOT" path="C:\Go" />
   <component name="Git.Settings">
@@ -61,11 +59,11 @@
       <recent name="E:\ProjectMgr\GoProject\microservice\proto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\xm\Desktop\microservice\example\service" />
+      <recent name="C:\Users\xm\Desktop\microservice\example\proto" />
       <recent name="C:\Users\xm\Desktop\microservice\micro" />
       <recent name="C:\Users\xm\Desktop\microservice\common" />
       <recent name="C:\Users\xm\Desktop\microservice\common\config" />
-      <recent name="E:\ProjectMgr\GoProject\microservice" />
-      <recent name="C:\Users\Lee\Desktop\work\microservice\jwt" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -80,7 +78,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Build.go build github.com/limitedlee/microservice/example/service">
     <configuration name="go build github.com/limitedlee/microservice" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="microservice" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -91,6 +89,20 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
+    <configuration name="go build github.com/limitedlee/microservice/example/service" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="microservice" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/example/service/main.go" />
+      <package value="github.com/limitedlee/microservice/example/service" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build github.com/limitedlee/microservice/example/service" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
