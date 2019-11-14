@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="60b41cd3-f443-4aa3-9d44-5b7c7ca2ac98" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/example/proto/user.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/proto/user.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/servers/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/servers/userservice.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/microservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/microservice.iml" afterDir="false" />
+    <list default="true" id="60b41cd3-f443-4aa3-9d44-5b7c7ca2ac98" name="Default Changelist" comment="修改grpc监听端口">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/appsetting.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/appsetting.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservice.go" beforeDir="false" afterPath="$PROJECT_DIR$/micro/microservice.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro/microservice.go" beforeDir="false" afterPath="$PROJECT_DIR$/micro/microservice.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +125,8 @@
     <MESSAGE value="优化系统" />
     <MESSAGE value="添加grpc功能" />
     <MESSAGE value="优化代码结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码结构" />
+    <MESSAGE value="修改grpc监听端口" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改grpc监听端口" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

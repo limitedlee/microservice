@@ -5,6 +5,7 @@ import (
 	"crypto/rsa"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/limitedlee/microservice/common/config"
 	jw "github.com/limitedlee/microservice/common/jwt"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
@@ -31,7 +32,12 @@ func (m *MicService) Start() {
 	mux.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("ok"))
 	})
-	http.ListenAndServe("127.0.0.1:8888", grpcHandleFunc(m.GrpcServer, mux))
+
+	baseUrl, _ := config.Get("BaseUrl")
+	items := strings.Split(baseUrl, ":")
+	addr := fmt.Sprintf(":%v", items[len(items)-1])
+
+	http.ListenAndServe(addr, grpcHandleFunc(m.GrpcServer, mux))
 }
 
 func grpcHandleFunc(grpcServer *grpc.Server, otherHander http.Handler) http.Handler {
