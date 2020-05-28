@@ -8,7 +8,7 @@ import (
 
 func main() {
 	micro := &micro.MicService{}
-	micro.Routes["/ws"] = handles.WsHandler
+	micro.Routes["/ws"] = handles.WebSocketHandler
 	micro.NewServer()
 	pb.RegisterUserServiceServer(micro.GrpcServer, &pb.UserService{})
 	micro.Start()
