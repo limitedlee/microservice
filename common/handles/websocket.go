@@ -20,7 +20,7 @@ var (
 	WebsocketConns = map[string]*socket.Connection{}
 )
 
-func WsHandler(w http.ResponseWriter, r *http.Request) {
+func WebSocketHandler(w http.ResponseWriter, r *http.Request) {
 	var (
 		wsConn *websocket.Conn
 		err    error

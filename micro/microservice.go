@@ -22,21 +22,18 @@ import (
 
 type MicService struct {
 	GrpcServer *grpc.Server
-	Route      map[string]func(response http.ResponseWriter, request *http.Request)
+	Routes     map[string]func(http.ResponseWriter, *http.Request)
 }
 
 func (m *MicService) NewServer() {
 	m.GrpcServer = grpc.NewServer(grpc.UnaryInterceptor(filter))
 }
 
-func (m *MicService) Start(mapHandles ...interface{}) {
+func (m *MicService) Start() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/ping", handles.CheckHealthy)
-	for _, mapHandle := range mapHandles {
-		if mapHandle.(int) == 1 {
-			mux.HandleFunc("/ws", handles.WsHandler) //websocket
-		}
-		break
+	for key, route := range m.Routes {
+		mux.HandleFunc(key, route) //websocket
 	}
 	baseUrl, _ := config.Get("BaseUrl")
 	items := strings.Split(baseUrl, ":")

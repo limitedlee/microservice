@@ -1,14 +1,14 @@
 package main
 
 import (
+	"github.com/limitedlee/microservice/common/handles"
 	pb "github.com/limitedlee/microservice/example/proto"
 	"github.com/limitedlee/microservice/micro"
 )
 
 func main() {
 	micro := &micro.MicService{}
-	//micro.Route["/ping"]=handles.WsHandler
-	//micro.Route["/"]
+	micro.Routes["/ws"] = handles.WsHandler
 	micro.NewServer()
 	pb.RegisterUserServiceServer(micro.GrpcServer, &pb.UserService{})
 	micro.Start()
