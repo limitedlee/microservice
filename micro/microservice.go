@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/limitedlee/microservice/common/config"
+	"github.com/limitedlee/microservice/common/handles"
 	jw "github.com/limitedlee/microservice/common/jwt"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
@@ -27,12 +28,17 @@ func (m *MicService) NewServer() {
 	m.GrpcServer = grpc.NewServer(grpc.UnaryInterceptor(filter))
 }
 
-func (m *MicService) Start() {
+func (m *MicService) Start(mapHandles ...interface{}) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("ok"))
 	})
-
+	for _, mapHandle := range mapHandles {
+		if mapHandle.(int) == 1 {
+			mux.HandleFunc("/ws", handles.WsHandler) //websocket
+		}
+		break
+	}
 	baseUrl, _ := config.Get("BaseUrl")
 	items := strings.Split(baseUrl, ":")
 	addr := fmt.Sprintf(":%v", items[len(items)-1])
