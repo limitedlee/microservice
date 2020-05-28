@@ -7,6 +7,8 @@ import (
 
 func main() {
 	micro := &micro.MicService{}
+	//micro.Route["/ping"]=handles.WsHandler
+	//micro.Route["/"]
 	micro.NewServer()
 	pb.RegisterUserServiceServer(micro.GrpcServer, &pb.UserService{})
 	micro.Start()

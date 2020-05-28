@@ -22,6 +22,7 @@ import (
 
 type MicService struct {
 	GrpcServer *grpc.Server
+	Route      map[string]func(response http.ResponseWriter, request *http.Request)
 }
 
 func (m *MicService) NewServer() {
@@ -30,9 +31,7 @@ func (m *MicService) NewServer() {
 
 func (m *MicService) Start(mapHandles ...interface{}) {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("ok"))
-	})
+	mux.HandleFunc("/ping", handles.CheckHealthy)
 	for _, mapHandle := range mapHandles {
 		if mapHandle.(int) == 1 {
 			mux.HandleFunc("/ws", handles.WsHandler) //websocket
