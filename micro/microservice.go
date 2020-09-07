@@ -29,13 +29,16 @@ func (m *MicService) NewServer() {
 	m.GrpcServer = grpc.NewServer(grpc.UnaryInterceptor(filter))
 }
 
-func (m *MicService) Start() {
+func (m *MicService) Start(url ...string) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/ping", handles.CheckHealthy)
 	for key, route := range m.Routes {
 		mux.HandleFunc(key, route) //websocket
 	}
 	baseUrl, _ := config.Get("BaseUrl")
+	if len(url) == 1 {
+		baseUrl = url[0]
+	}
 	items := strings.Split(baseUrl, ":")
 	addr := fmt.Sprintf(":%v", items[len(items)-1])
 
