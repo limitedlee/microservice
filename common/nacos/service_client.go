@@ -41,6 +41,7 @@ func RegisterServiceInstance(param vo.RegisterInstanceParam) {
 	})
 	if err != nil {
 		panic(err)
+
 	}
 	success, _ := client.RegisterInstance(param)
 	glog.Info(fmt.Printf("RegisterServiceInstance,param:%+v,result:%+v \n\n", param, success))

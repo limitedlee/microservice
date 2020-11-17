@@ -11,5 +11,5 @@ func main() {
 	micro.Routes["/ws"] = handles.WebSocketHandler
 	micro.NewServer()
 	pb.RegisterUserServiceServer(micro.GrpcServer, &pb.UserService{})
-	micro.Start()
+	micro.Start("test-server")
 }
