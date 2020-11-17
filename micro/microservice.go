@@ -8,6 +8,8 @@ import (
 	"github.com/limitedlee/microservice/common/config"
 	"github.com/limitedlee/microservice/common/handles"
 	jw "github.com/limitedlee/microservice/common/jwt"
+	"github.com/limitedlee/microservice/common/nacos"
+	"github.com/nacos-group/nacos-sdk-go/vo"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"google.golang.org/grpc"
@@ -17,6 +19,7 @@ import (
 	"log"
 	"net/http"
 	"runtime/debug"
+	"strconv"
 	"strings"
 )
 
@@ -29,7 +32,7 @@ func (m *MicService) NewServer() {
 	m.GrpcServer = grpc.NewServer(grpc.UnaryInterceptor(filter))
 }
 
-func (m *MicService) Start() {
+func (m *MicService) Start(serviceName string) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/ping", handles.CheckHealthy)
 	for key, route := range m.Routes {
@@ -39,6 +42,23 @@ func (m *MicService) Start() {
 	items := strings.Split(baseUrl, ":")
 	addr := fmt.Sprintf(":%v", items[len(items)-1])
 
+	if len(items) <= 0 {
+		panic("Please define the port，example(:7065)")
+	}
+	intNum, _ := strconv.Atoi(items[1])
+	port := uint64(intNum)
+
+	nacos.RegisterServiceInstance(vo.RegisterInstanceParam{
+		Ip:          nacos.GetOutboundIp(),
+		Port:        port,
+		ServiceName: serviceName,
+		Weight:      10,
+		ClusterName: "DEFAULT",
+		Enable:      true,
+		Healthy:     true,
+		Ephemeral:   true,
+		GroupName:   "DEFAULT_GROUP",
+	})
 	http.ListenAndServe(addr, grpcHandleFunc(m.GrpcServer, mux))
 }
 
