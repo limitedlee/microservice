@@ -2,7 +2,6 @@ package nacos
 
 import (
 	"fmt"
-	"github.com/limitedlee/microservice/common/logger"
 	"github.com/limitedlee/microservice/common/config"
 	"github.com/nacos-group/nacos-sdk-go/clients"
 	"github.com/nacos-group/nacos-sdk-go/common/constant"
@@ -44,14 +43,14 @@ func RegisterServiceInstance(param vo.RegisterInstanceParam) {
 
 	}
 	success, _ := client.RegisterInstance(param)
-	logger.Info(fmt.Printf("RegisterServiceInstance,param:%+v,result:%+v \n\n", param, success))
+	fmt.Printf("RegisterServiceInstance,param:%+v,result:%+v \n\n", param, success)
 }
 
 // Get preferred outbound ip of this machine
 func GetOutboundIp() string {
 	conn, err := net.Dial("udp", "8.8.8.8:80")
 	if err != nil {
-		logger.Fatal(err)
+		panic(err)
 	}
 	defer conn.Close()
 	localAddr := conn.LocalAddr().(*net.UDPAddr)
