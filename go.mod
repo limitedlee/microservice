@@ -1,6 +1,6 @@
 module github.com/limitedlee/microservice
 
-go 1.12
+go 1.13
 
 require (
 	github.com/BurntSushi/toml v0.3.1
@@ -8,7 +8,8 @@ require (
 	github.com/golang/protobuf v1.3.2
 	github.com/gorilla/websocket v1.4.2
 	github.com/labstack/echo/v4 v4.1.16
-	github.com/lsls907/nacos-sdk-go v0.0.0-20201119023842-e7da3bfa4d91
+	github.com/nacos-group/nacos-sdk-go v1.0.1
 	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
+	github.com/lsls907/nacos-sdk-go v0.1.1
 	google.golang.org/grpc v1.26.0
 )
