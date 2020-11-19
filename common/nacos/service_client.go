@@ -3,6 +3,9 @@ package nacos
 import (
 	"fmt"
 	"github.com/limitedlee/microservice/common/config"
+	"github.com/lsls907/nacos-sdk-go/clients"
+	"github.com/lsls907/nacos-sdk-go/common/constant"
+	"github.com/lsls907/nacos-sdk-go/vo"
 	"net"
 	"strconv"
 )
