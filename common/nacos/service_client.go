@@ -3,9 +3,6 @@ package nacos
 import (
 	"fmt"
 	"github.com/limitedlee/microservice/common/config"
-	"github.com/nacos-group/nacos-sdk-go/clients"
-	"github.com/nacos-group/nacos-sdk-go/common/constant"
-	"github.com/nacos-group/nacos-sdk-go/vo"
 	"net"
 	"strconv"
 )
@@ -27,7 +24,7 @@ func RegisterServiceInstance(param vo.RegisterInstanceParam) {
 		NamespaceId:         namespaceId, //namespace id
 		TimeoutMs:           5000,        // 请求Nacos服务端的超时时间，默认是10000ms
 		NotLoadCacheAtStart: true,        // 在启动的时候不读取缓存在CacheDir的service信息
-		//LogDir:              "/tmp/nacos/log", // 日志存储路径
+		LogDir:              "/tmp/nacos/log", // 日志存储路径
 		//CacheDir:            "/tmp/nacos/cache",
 		RotateTime: "24h",  // 日志轮转周期，比如：30m, 1h, 24h, 默认是24h
 		MaxAge:     3,      // 日志最大文件数，默认3
