@@ -14,7 +14,11 @@ type ApiMicroService struct {
 	echo.Echo
 }
 
-func (a *ApiMicroService) Start(serviceName string) error {
+func (a *ApiMicroService) NewServer(){
+	 echo.New()
+}
+
+func (a *ApiMicroService) StartApi(serviceName string) error {
 	baseUrl, _ := config.Get("BaseUrl")
 	items := strings.Split(baseUrl, ":")
 	addr := fmt.Sprintf(":%v", items[len(items)-1])
