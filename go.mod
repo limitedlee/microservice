@@ -12,4 +12,6 @@ require (
 	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
 	github.com/lsls907/nacos-sdk-go v0.1.1
 	google.golang.org/grpc v1.26.0
+    github.com/labstack/echo/v4 v4.1.15
+
 )
