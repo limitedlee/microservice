@@ -14,8 +14,8 @@ type ApiMicroService struct {
 	echo.Echo
 }
 
-func (a *ApiMicroService) NewServer(){
-	 echo.New()
+func (a *ApiMicroService) NewServer() *echo.Echo {
+	return echo.New()
 }
 
 func (a *ApiMicroService) StartApi(serviceName string) error {

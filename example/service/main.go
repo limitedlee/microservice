@@ -7,6 +7,10 @@ import (
 )
 
 func main() {
+	//micro := &micro.ApiMicroService{}
+	//micro.NewServer()
+	//micro.StartApi("")
+
 	micro := &micro.MicService{}
 	micro.Routes["/ws"] = handles.WebSocketHandler
 	micro.NewServer()
