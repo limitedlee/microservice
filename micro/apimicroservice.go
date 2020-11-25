@@ -19,10 +19,13 @@ func (a *ApiMicroService) NewServer() *echo.Echo {
 }
 
 //注入nacos
-func (a *ApiMicroService) StartApi(e *echo.Echo, serviceName string) error {
+func (a *ApiMicroService) StartApi(e *echo.Echo, serviceName string,addr string) error {
 	baseUrl, _ := config.Get("BaseUrl")
 	items := strings.Split(baseUrl, ":")
-	addr := fmt.Sprintf(":%v", items[len(items)-1])
+
+	if len(addr)<=0{
+		addr = fmt.Sprintf(":%v", items[len(items)-1])
+	}
 
 	if len(items) <= 0 {
 		panic("Please define the port，example(:7065)")
@@ -43,3 +46,6 @@ func (a *ApiMicroService) StartApi(e *echo.Echo, serviceName string) error {
 	})
 	return e.Start(addr)
 }
+
+
+
