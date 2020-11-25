@@ -11,7 +11,7 @@ import (
 )
 
 type ApiMicroService struct {
-	echo.Echo
+	//echo.Echo
 }
 
 func (a *ApiMicroService) NewServer() *echo.Echo {
@@ -19,19 +19,8 @@ func (a *ApiMicroService) NewServer() *echo.Echo {
 }
 
 //注入nacos
-func (a *ApiMicroService) StartApi(e *echo.Echo, serviceName string,addr string) error {
-	baseUrl, _ := config.Get("BaseUrl")
-	items := strings.Split(baseUrl, ":")
-
-	if len(addr)<=0{
-		addr = fmt.Sprintf(":%v", items[len(items)-1])
-	}
-
-	if len(items) <= 0 {
-		panic("Please define the port，example(:7065)")
-	}
-	intNum, _ := strconv.Atoi(items[1])
-	port := uint64(intNum)
+func (a *ApiMicroService) StartApi(e *echo.Echo, serviceName string, addr string) error {
+	port, addr := getAddr(addr)
 
 	nacos.RegisterServiceInstance(vo.RegisterInstanceParam{
 		Ip:          nacos.GetOutboundIp(),
@@ -47,5 +36,19 @@ func (a *ApiMicroService) StartApi(e *echo.Echo, serviceName string,addr string)
 	return e.Start(addr)
 }
 
+func getAddr(addr string) (uint64, string) {
+	baseUrl := ""
+	if len(addr) <= 0 {
+		baseUrl, _ = config.Get("BaseUrl")
+	} else {
+		baseUrl = addr
+	}
+	items := strings.Split(baseUrl, ":")
+	if len(items) <= 0 {
+		panic("Please define the port，example(:7065)")
+	}
+	port, _ := strconv.Atoi(items[1])
+	addr = fmt.Sprintf(":%v", items[len(items)-1])
+	return uint64(port), addr
 
-
+}
