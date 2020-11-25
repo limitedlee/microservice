@@ -18,6 +18,7 @@ func (a *ApiMicroService) NewServer() *echo.Echo {
 	return echo.New()
 }
 
+//注入nacos
 func (a *ApiMicroService) StartApi(e *echo.Echo, serviceName string) error {
 	baseUrl, _ := config.Get("BaseUrl")
 	items := strings.Split(baseUrl, ":")
