@@ -18,7 +18,7 @@ func (a *ApiMicroService) NewServer() *echo.Echo {
 	return echo.New()
 }
 
-func (a *ApiMicroService) StartApi(serviceName string) error {
+func (a *ApiMicroService) StartApi(e *echo.Echo, serviceName string) error {
 	baseUrl, _ := config.Get("BaseUrl")
 	items := strings.Split(baseUrl, ":")
 	addr := fmt.Sprintf(":%v", items[len(items)-1])
@@ -40,5 +40,5 @@ func (a *ApiMicroService) StartApi(serviceName string) error {
 		Ephemeral:   true,
 		GroupName:   "DEFAULT_GROUP",
 	})
-	return a.Start(addr)
+	return e.Start(addr)
 }
