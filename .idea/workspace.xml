@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3423b31a-1cef-44d1-8e9a-52578bad1477" name="默认更改列表" comment="">
-      <change beforePath="$PROJECT_DIR$/micro/apimicroservice.go" beforeDir="false" afterPath="$PROJECT_DIR$/micro/apimicroservice.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +22,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/micro/apimicroservice.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="702">
-                  <caret line="50" column="50" selection-start-line="50" selection-start-column="50" selection-end-line="50" selection-end-column="50" />
+                <state relative-caret-position="629">
+                  <caret line="37" selection-start-line="37" selection-end-line="37" />
                   <folding>
                     <element signature="e#15#226#0" expanded="true" />
                   </folding>
@@ -34,7 +34,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$USER_HOME$/GOPATH/pkg/mod/github.com/labstack/echo/v4@v4.1.16/group.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="277">
+                <state relative-caret-position="1581">
                   <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
                 </state>
               </provider>
@@ -43,7 +43,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$USER_HOME$/GOPATH/pkg/mod/github.com/labstack/echo/v4@v4.1.16/echo_test.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-747">
+                <state relative-caret-position="5559">
                   <caret line="342" column="10" selection-start-line="342" selection-start-column="10" selection-end-line="342" selection-end-column="10" />
                 </state>
               </provider>
@@ -82,8 +82,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/common/nacos/service_client.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="595">
-                  <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+                <state relative-caret-position="459">
+                  <caret line="35" selection-start-line="35" selection-end-line="35" />
                   <folding>
                     <element signature="e#15#234#0" expanded="true" />
                   </folding>
@@ -103,8 +103,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/micro/microservice.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="442">
-                  <caret line="50" column="23" lean-forward="true" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+                <state relative-caret-position="493">
+                  <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
                 </state>
               </provider>
             </entry>
@@ -163,6 +163,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -213,7 +214,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -274,7 +274,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1913646" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19349681" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -404,37 +404,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LICENSE">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/service/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/micro/microservice.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="50" column="23" lean-forward="true" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/nacos/service_client.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-          <folding>
-            <element signature="e#15#234#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/GOPATH/pkg/mod/github.com/labstack/echo/v4@v4.1.16/echo.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
           <caret line="296" column="19" selection-start-line="296" selection-start-column="12" selection-end-line="296" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/GOPATH/pkg/mod/github.com/labstack/echo/v4@v4.1.16/group.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1581">
+          <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/GOPATH/pkg/mod/github.com/labstack/echo/v4@v4.1.16/echo_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5559">
+          <caret line="342" column="10" selection-start-line="342" selection-start-column="10" selection-end-line="342" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -462,27 +452,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/GOPATH/pkg/mod/github.com/labstack/echo/v4@v4.1.16/group.go">
+    <entry file="file://$PROJECT_DIR$/common/nacos/service_client.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
+        <state relative-caret-position="459">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="e#15#234#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/GOPATH/pkg/mod/github.com/labstack/echo/v4@v4.1.16/echo_test.go">
+    <entry file="file://$PROJECT_DIR$/example/service/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-747">
-          <caret line="342" column="10" selection-start-line="342" selection-start-column="10" selection-end-line="342" selection-end-column="10" />
+        <state relative-caret-position="85">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/micro/apimicroservice.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="50" column="50" selection-start-line="50" selection-start-column="50" selection-end-line="50" selection-end-column="50" />
+        <state relative-caret-position="629">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
           <folding>
             <element signature="e#15#226#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/micro/microservice.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
         </state>
       </provider>
     </entry>
