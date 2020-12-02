@@ -7,7 +7,6 @@ import (
 	"github.com/limitedlee/microservice/common/handles"
 	"github.com/limitedlee/microservice/common/nacos"
 	"github.com/lsls907/nacos-sdk-go/vo"
-	"net/http"
 	"strconv"
 	"strings"
 )
@@ -22,9 +21,8 @@ func (a *ApiMicroService) NewServer() *echo.Echo {
 
 //注入nacos
 func (a *ApiMicroService) StartApi(e *echo.Echo, serviceName string, addr string) error {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/pool/change",handles.ChangesPool)
-
+	r := e.Group("/pool")
+	r.POST("/change", handles.ApiChangesPool)
 	port, addr := getAddr(addr)
 
 	nacos.RegisterServiceInstance(vo.RegisterInstanceParam{
