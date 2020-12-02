@@ -35,6 +35,8 @@ func (m *MicService) NewServer() {
 func (m *MicService) Start(serviceName string) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/ping", handles.CheckHealthy)
+
+	mux.HandleFunc("/pool/change",handles.ChangesPool)
 	for key, route := range m.Routes {
 		mux.HandleFunc(key, route) //websocket
 	}

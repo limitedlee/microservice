@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/limitedlee/microservice/common/config"
+	"github.com/limitedlee/microservice/common/handles"
 	"github.com/limitedlee/microservice/common/nacos"
 	"github.com/lsls907/nacos-sdk-go/vo"
+	"net/http"
 	"strconv"
 	"strings"
 )
@@ -20,6 +22,9 @@ func (a *ApiMicroService) NewServer() *echo.Echo {
 
 //注入nacos
 func (a *ApiMicroService) StartApi(e *echo.Echo, serviceName string, addr string) error {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/pool/change",handles.ChangesPool)
+
 	port, addr := getAddr(addr)
 
 	nacos.RegisterServiceInstance(vo.RegisterInstanceParam{
@@ -35,6 +40,8 @@ func (a *ApiMicroService) StartApi(e *echo.Echo, serviceName string, addr string
 	})
 	return e.Start(addr)
 }
+
+
 
 func getAddr(addr string) (uint64, string) {
 	baseUrl := ""
