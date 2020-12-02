@@ -19,6 +19,12 @@ import (
 	"time"
 )
 
+type PoolUrl struct {
+	url    string
+	weight int
+	score  int
+}
+
 const (
 	ConfigsUrl = "v1/cs/configs"
 
@@ -89,18 +95,29 @@ func initConfigs(params InitConfigRequest) {
 		DataId: params.ServerName,
 		Group:  params.GroupName,
 	}
-	poolMap := make(map[string][]string, 0)
+	poolMap := make(map[string][]PoolUrl, 0)
 	v := getConfigs(configInfo)
 	if len(v) > 0 {
 		_ = json.Unmarshal([]byte(v), poolMap)
 	}
+	strKey := fmt.Sprintf("%s:%d", params.Ip, params.Port)
+	//todo 默认权重为0
+	pool := PoolUrl{
+		strKey,
+		0,
+		100,
+	}
 	if len(poolMap) > 0 || len(poolMap[params.ServerName]) > 0 {
-		ips := poolMap[params.ServerName]
-		ips = append(ips, fmt.Sprintf("%s:%d", params.Ip, params.Port))
-		poolMap[params.ServerName] = ips
+		//todo 判定当前服务是否存在在配置中　不存在直接加入，
+		pools := poolMap[params.ServerName]
+		pools = append(pools, pool)
+		poolMap[params.ServerName] = pools
+
 	} else {
-		ips := []string{fmt.Sprintf("%s:%d", params.Ip, params.Port)}
-		poolMap[params.ServerName] = ips
+		pools := make([]PoolUrl, 0)
+		pools = append(pools, pool)
+		poolMap[params.ServerName] = pools
+		//poolMap[params.ServerName] = ips
 	}
 	content, err := json.Marshal(poolMap)
 	if err != nil {
@@ -122,10 +139,10 @@ func setConfigs(configInfo ConfigRequest) bool {
 	//	configInfo.Group, configInfo.Tenant, configInfo.Content)
 	var url = nacosOpenApiUrl + ConfigsUrl //+ data
 	data := make(map[string]string)
-	data["dataId"]=configInfo.DataId
-	data["group"]=configInfo.Group
-	data["tenant"]=configInfo.Tenant
-	data["content"]=configInfo.Content
+	data["dataId"] = configInfo.DataId
+	data["group"] = configInfo.Group
+	data["tenant"] = configInfo.Tenant
+	data["content"] = configInfo.Content
 	val, err := httpPostFormData(url, &data)
 	//val, err := httpPost(url, nil, "")
 	if err != nil {
@@ -181,24 +198,23 @@ func httpPost(url string, dataJson []byte, Headers string) ([]byte, error) {
 	return body, err
 }
 
-
-func httpPostFormData(url string, postData *map[string]string) ([]byte, error){
+func httpPostFormData(url string, postData *map[string]string) ([]byte, error) {
 	body := new(bytes.Buffer)
 	w := multipart.NewWriter(body)
-	for k,v :=  range *postData{
+	for k, v := range *postData {
 		w.WriteField(k, v)
 	}
 	w.Close()
 	req, _ := http.NewRequest("POST", url, body)
 	req.Header.Set("Content-Type", w.FormDataContentType())
 
-	resp, err:= http.DefaultClient.Do(req)
+	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		panic(err)
 		return []byte(""), err
 	}
 	data, _ := ioutil.ReadAll(resp.Body)
-	defer  resp.Body.Close()
+	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
 		return nil, errors.New("resp status:" + fmt.Sprint(resp.StatusCode))
