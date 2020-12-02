@@ -21,7 +21,7 @@ const (
 	ConfigsUrl = "v1/cs/configs"
 
 	//nacos 全局配置名称
-	MasterConfigName ="MasterPool"
+	MasterConfigName = "MasterPool"
 )
 
 //Register with default cluster and group
@@ -80,7 +80,6 @@ func GetOutboundIp() string {
 	return localAddr.IP.String()
 }
 
-
 //init nacos configs
 func initConfigs(params InitConfigRequest) {
 	configInfo := ConfigRequest{
@@ -93,15 +92,13 @@ func initConfigs(params InitConfigRequest) {
 	if len(v) > 0 {
 		_ = json.Unmarshal([]byte(v), poolMap)
 	}
-	if len(poolMap) > 0 {
-		if len(poolMap[params.ServerName]) > 0 {
-			ips := poolMap[params.ServerName]
-			ips = append(ips, fmt.Sprintf("%s:%d", params.Ip, params.Port))
-			poolMap[params.ServerName] = ips
-		} else {
-			ips := []string{fmt.Sprintf("%s:%d", params.Ip, params.Port)}
-			poolMap[params.ServerName] = ips
-		}
+	if len(poolMap) > 0 || len(poolMap[params.ServerName]) > 0 {
+		ips := poolMap[params.ServerName]
+		ips = append(ips, fmt.Sprintf("%s:%d", params.Ip, params.Port))
+		poolMap[params.ServerName] = ips
+	} else {
+		ips := []string{fmt.Sprintf("%s:%d", params.Ip, params.Port)}
+		poolMap[params.ServerName] = ips
 	}
 	content, err := json.Marshal(poolMap)
 	if err != nil {
