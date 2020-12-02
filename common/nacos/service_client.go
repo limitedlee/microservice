@@ -4,12 +4,14 @@ import (
 	"bytes"
 	"crypto/tls"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/limitedlee/microservice/common/config"
 	"github.com/lsls907/nacos-sdk-go/clients"
 	"github.com/lsls907/nacos-sdk-go/common/constant"
 	"github.com/lsls907/nacos-sdk-go/vo"
 	"io/ioutil"
+	"mime/multipart"
 	"net"
 	"net/http"
 	"strconv"
@@ -116,11 +118,16 @@ func initConfigs(params InitConfigRequest) {
 func setConfigs(configInfo ConfigRequest) bool {
 
 	nacosOpenApiUrl, _ := config.Get("nacos-url")
-	data := fmt.Sprintf("?dataId=%s&group=%s&tenant=%s&content=%s", configInfo.DataId,
-		configInfo.Group, configInfo.Tenant, configInfo.Content)
-	var url = nacosOpenApiUrl + ConfigsUrl + data
-
-	val, err := httpPost(url, nil, "")
+	//data := fmt.Sprintf("?dataId=%s&group=%s&tenant=%s&content=%s", configInfo.DataId,
+	//	configInfo.Group, configInfo.Tenant, configInfo.Content)
+	var url = nacosOpenApiUrl + ConfigsUrl //+ data
+	data := make(map[string]string)
+	data["dataId"]=configInfo.DataId
+	data["group"]=configInfo.Group
+	data["tenant"]=configInfo.Tenant
+	data["content"]=configInfo.Content
+	val, err := httpPostFormData(url, &data)
+	//val, err := httpPost(url, nil, "")
 	if err != nil {
 		panic(err)
 		return false
@@ -172,6 +179,31 @@ func httpPost(url string, dataJson []byte, Headers string) ([]byte, error) {
 	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	return body, err
+}
+
+
+func httpPostFormData(url string, postData *map[string]string) ([]byte, error){
+	body := new(bytes.Buffer)
+	w := multipart.NewWriter(body)
+	for k,v :=  range *postData{
+		w.WriteField(k, v)
+	}
+	w.Close()
+	req, _ := http.NewRequest("POST", url, body)
+	req.Header.Set("Content-Type", w.FormDataContentType())
+
+	resp, err:= http.DefaultClient.Do(req)
+	if err != nil {
+		panic(err)
+		return []byte(""), err
+	}
+	data, _ := ioutil.ReadAll(resp.Body)
+	defer  resp.Body.Close()
+
+	if resp.StatusCode != 200 {
+		return nil, errors.New("resp status:" + fmt.Sprint(resp.StatusCode))
+	}
+	return data, err
 }
 
 //url ：
