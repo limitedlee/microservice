@@ -19,12 +19,6 @@ import (
 	"time"
 )
 
-type PoolUrl struct {
-	url    string
-	weight int
-	score  int
-}
-
 const (
 	ConfigsUrl = "v1/cs/configs"
 
@@ -70,7 +64,7 @@ func RegisterServiceInstance(param vo.RegisterInstanceParam) {
 	//初始化配置信息
 	initConfigs(InitConfigRequest{
 		NamespaceId: namespaceId,
-		ServerName:  MasterConfigName,
+		ServerName:  param.ServiceName,
 		GroupName:   param.GroupName,
 		Ip:          param.Ip,
 		Port:        intPort,
@@ -124,6 +118,8 @@ func initConfigs(params InitConfigRequest) {
 		fmt.Print("initConfigs fmap to json error:", err)
 		return
 	}
+
+	configInfo.DataId = MasterConfigName
 	configInfo.Content = string(content)
 
 	flag := setConfigs(configInfo)
