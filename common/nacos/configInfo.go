@@ -17,7 +17,7 @@ type InitConfigRequest struct {
 }
 
 type PoolUrl struct {
-	url    string //ip+port (10.1.1.248:7065)
-	weight int    //权重总分100
-	score  int    //当前这个实例的得分
+	Url    string `json:"url"`    //ip+port (10.1.1.248:7065)
+	Weight int    `json:"weight"` //权重总分100
+	Score  int    `json:"score"`  //当前这个实例的得分
 }

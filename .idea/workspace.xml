@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3423b31a-1cef-44d1-8e9a-52578bad1477" name="默认更改列表" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/handles/keepalive.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/handles/keepalive.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/nacos/configInfo.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/nacos/configInfo.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/nacos/service_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/nacos/service_client.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,11 +14,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.64469117">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/common/nacos/service_client.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="340">
-                  <caret line="20" selection-start-line="20" selection-end-line="20" />
+                <state relative-caret-position="464">
+                  <caret line="98" column="20" lean-forward="true" selection-start-line="98" selection-start-column="20" selection-end-line="98" selection-end-column="20" />
                   <folding>
                     <element signature="e#15#234#0" expanded="true" />
                     <element signature="n#!!block;n#GetOutboundIp#0" />
@@ -62,11 +59,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/common/handles/keepalive.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="379">
-                  <caret line="44" column="64" selection-start-line="44" selection-start-column="64" selection-end-line="44" selection-end-column="64" />
+                <state relative-caret-position="748">
+                  <caret line="44" column="26" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
                   <folding>
                     <element signature="e#17#39#0" expanded="true" />
                   </folding>
@@ -93,8 +90,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/common/nacos/configInfo.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
-                  <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+                <state relative-caret-position="306">
+                  <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
                 </state>
               </provider>
             </entry>
@@ -136,8 +133,8 @@
         <option value="$PROJECT_DIR$/common/grpc/baseClient.go" />
         <option value="$PROJECT_DIR$/micro/apimicroservice.go" />
         <option value="$PROJECT_DIR$/common/nacos/service_client.go" />
-        <option value="$PROJECT_DIR$/common/nacos/configInfo.go" />
         <option value="$PROJECT_DIR$/common/handles/keepalive.go" />
+        <option value="$PROJECT_DIR$/common/nacos/configInfo.go" />
       </list>
     </option>
   </component>
@@ -520,10 +517,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/common/handles/keepalive.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="26" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
+          <folding>
+            <element signature="e#17#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/nacos/configInfo.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/common/nacos/service_client.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="464">
+          <caret line="98" column="20" lean-forward="true" selection-start-line="98" selection-start-column="20" selection-end-line="98" selection-end-column="20" />
           <folding>
             <element signature="e#15#234#0" expanded="true" />
             <element signature="n#!!block;n#GetOutboundIp#0" />
@@ -532,23 +546,6 @@
             <element signature="n#!!block;n#HttpPost#0" />
             <element signature="n#!!block;n#HttpPostFormData#0" />
             <element signature="n#!!block;n#HttpGet#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/nacos/configInfo.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/handles/keepalive.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="44" column="64" selection-start-line="44" selection-start-column="64" selection-end-line="44" selection-end-column="64" />
-          <folding>
-            <element signature="e#17#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
