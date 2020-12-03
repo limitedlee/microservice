@@ -93,7 +93,7 @@ func initConfigs(params InitConfigRequest) {
 	poolMap := make(map[string][]PoolUrl, 0)
 	v := getConfigs(configInfo)
 	if len(v) > 0 {
-		_ = json.Unmarshal([]byte(v), poolMap)
+		_ = json.Unmarshal([]byte(v), &poolMap)
 	}
 	strKey := fmt.Sprintf("%s:%d", params.Ip, params.Port)
 	//todo 默认权重为0

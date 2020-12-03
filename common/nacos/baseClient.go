@@ -66,7 +66,7 @@ func getPoolUrl(serverName string) string {
 			return ""
 		}
 		poolMap := make(map[string][]PoolUrl, 0)
-		_ = json.Unmarshal([]byte(data), poolMap)
+		_ = json.Unmarshal([]byte(data), &poolMap)
 
 		if len(poolMap[serverName]) <= 0 {
 			return ""
