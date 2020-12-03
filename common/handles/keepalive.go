@@ -4,13 +4,12 @@ import (
 	"encoding/json"
 	"github.com/labstack/echo/v4"
 	"github.com/limitedlee/microservice/common/nacos"
+
 	"io/ioutil"
 	"net/http"
-	"sync"
 )
 
 //全局变量 grpc 连接池map
-var GrpcPool = make(map[string][]nacos.PoolUrl, 0)
 
 func CheckHealthy(response http.ResponseWriter, request *http.Request) {
 	_, _ = response.Write([]byte("ok"))
@@ -42,17 +41,15 @@ func ChangesPool(response http.ResponseWriter, request *http.Request) {
 	_, _ = response.Write([]byte("true"))
 }
 
-var Mutex sync.Mutex //定义一个锁的变量(互斥锁的关键字是Mutex，其是一个结构体，传参一定要传地址，否则就不对了)
-
 func changeGrpcPool(changeData map[string][]nacos.PoolUrl) {
 	if len(changeData) <= 0 {
 		return
 	}
-	if len(GrpcPool) <= 0 {
+	if len(nacos.GrpcPool) <= 0 {
 		return
 	}
 	data := make(map[string][]nacos.PoolUrl, 0)
-	for key := range GrpcPool {
+	for key := range nacos.GrpcPool {
 		if len(changeData[key]) > 0 {
 			data[key] = changeData[key]
 		}
@@ -60,8 +57,8 @@ func changeGrpcPool(changeData map[string][]nacos.PoolUrl) {
 	if len(data) <= 0 {
 		return
 	}
-	Mutex.Lock() //对共享变量操作之前先加锁
-	GrpcPool = data
-	Mutex.Unlock() //对共享变量操作完毕在解锁，
+	nacos.Mutex.Lock() //对共享变量操作之前先加锁
+	nacos.GrpcPool = data
+	nacos.Mutex.Unlock() //对共享变量操作完毕在解锁，
 
 }

@@ -4,13 +4,17 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/limitedlee/microservice/common/config"
-	"github.com/limitedlee/microservice/common/handles"
+
 	wr "github.com/mroth/weightedrand"
 	"google.golang.org/grpc"
 	"math/rand"
 	"reflect"
+	"sync"
 	"time"
 )
+
+var GrpcPool = make(map[string][]PoolUrl, 0)
+var Mutex sync.Mutex //定义一个锁的变量(互斥锁的关键字是Mutex，其是一个结构体，传参一定要传地址，否则就不对了)
 
 var clientMap = make(map[string]ClientConnection, 0)
 
@@ -49,7 +53,7 @@ func GetGrpcConn(serverName string) ClientConnection {
 }
 
 func getPoolUrl(serverName string) string {
-	if len(handles.GrpcPool) <= 0 || len(handles.GrpcPool[serverName]) <= 0 {
+	if len(GrpcPool) <= 0 || len(GrpcPool[serverName]) <= 0 {
 		//handles.GrpcPool[serverName]=
 		namespaceId, _ := config.Get("nacos-namespace-id")
 		data := getConfigs(ConfigRequest{
@@ -66,12 +70,12 @@ func getPoolUrl(serverName string) string {
 		if len(poolMap[serverName]) <= 0 {
 			return ""
 		}
-		handles.Mutex.Lock() //对共享变量操作之前先加锁
-		handles.GrpcPool[serverName] = poolMap[serverName]
-		handles.Mutex.Unlock() //对共享变量操作完毕在解锁，
+		Mutex.Lock() //对共享变量操作之前先加锁
+		GrpcPool[serverName] = poolMap[serverName]
+		Mutex.Unlock() //对共享变量操作完毕在解锁，
 		return getAdUrl(poolMap[serverName])
 	}
-	return getAdUrl(handles.GrpcPool[serverName])
+	return getAdUrl(GrpcPool[serverName])
 
 }
 
