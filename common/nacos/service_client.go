@@ -26,6 +26,7 @@ const (
 	MasterConfigName = "MasterPool"
 )
 
+
 //Register with default cluster and group
 //ClusterName=DEFAULT,GroupName=DEFAULT_GROUP
 func RegisterServiceInstance(param vo.RegisterInstanceParam) {

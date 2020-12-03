@@ -21,7 +21,7 @@ func ApiChangesPool(c echo.Context) error {
 	if err := c.Bind(changeData); err != nil {
 		return c.String(200, "false")
 	}
-	ChangeGrpcPool(changeData)
+	changeGrpcPool(changeData)
 
 	return c.String(http.StatusOK, "true")
 }
@@ -37,14 +37,14 @@ func ChangesPool(response http.ResponseWriter, request *http.Request) {
 	if err != nil {
 		_, _ = response.Write([]byte("false"))
 	}
-	ChangeGrpcPool(changeData)
+	changeGrpcPool(changeData)
 
 	_, _ = response.Write([]byte("true"))
 }
 
-var mutex sync.Mutex //定义一个锁的变量(互斥锁的关键字是Mutex，其是一个结构体，传参一定要传地址，否则就不对了)
+var Mutex sync.Mutex //定义一个锁的变量(互斥锁的关键字是Mutex，其是一个结构体，传参一定要传地址，否则就不对了)
 
-func ChangeGrpcPool(changeData map[string][]nacos.PoolUrl) {
+func changeGrpcPool(changeData map[string][]nacos.PoolUrl) {
 	if len(changeData) <= 0 {
 		return
 	}
@@ -60,8 +60,8 @@ func ChangeGrpcPool(changeData map[string][]nacos.PoolUrl) {
 	if len(data) <= 0 {
 		return
 	}
-	mutex.Lock() //对共享变量操作之前先加锁
+	Mutex.Lock() //对共享变量操作之前先加锁
 	GrpcPool = data
-	mutex.Unlock() //对共享变量操作完毕在解锁，
+	Mutex.Unlock() //对共享变量操作完毕在解锁，
 
 }
