@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-//全局变量 grpc 连接池map
+
 
 func CheckHealthy(response http.ResponseWriter, request *http.Request) {
 	_, _ = response.Write([]byte("ok"))

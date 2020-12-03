@@ -13,9 +13,10 @@ import (
 	"time"
 )
 
+//全局变量 grpc 连接池map
 var GrpcPool = make(map[string][]PoolUrl, 0)
 var Mutex sync.Mutex //定义一个锁的变量(互斥锁的关键字是Mutex，其是一个结构体，传参一定要传地址，否则就不对了)
-
+//当前系统打开的连接池
 var clientMap = make(map[string]ClientConnection, 0)
 
 type ClientConnection struct {
