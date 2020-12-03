@@ -102,12 +102,20 @@ func initConfigs(params InitConfigRequest) {
 		0,
 		100,
 	}
+	//todo 判定当前服务是否存在在配置中　不存在直接加入，
 	if len(poolMap) > 0 || len(poolMap[params.ServerName]) > 0 {
-		//todo 判定当前服务是否存在在配置中　不存在直接加入，
 		pools := poolMap[params.ServerName]
-		pools = append(pools, pool)
-		poolMap[params.ServerName] = pools
-
+		flag:=false
+		for _,item:=range poolMap[params.ServerName]{
+			if item.Url==pool.Url{
+				flag=true
+				continue
+			}
+		}
+		if !flag{
+			pools = append(pools, pool)
+			poolMap[params.ServerName] = pools
+		}
 	} else {
 		pools := make([]PoolUrl, 0)
 		pools = append(pools, pool)
