@@ -68,7 +68,7 @@ func RegisterServiceInstance(param vo.RegisterInstanceParam) {
 		ServerName:  param.ServiceName,
 		GroupName:   param.GroupName,
 		Ip:          param.Ip,
-		Port:        intPort,
+		Port:        int(param.Port),
 	})
 }
 
@@ -87,7 +87,7 @@ func GetOutboundIp() string {
 func initConfigs(params InitConfigRequest) {
 	configInfo := ConfigRequest{
 		Tenant: params.NamespaceId,
-		DataId: params.ServerName,
+		DataId: MasterConfigName,
 		Group:  params.GroupName,
 	}
 	poolMap := make(map[string][]PoolUrl, 0)
