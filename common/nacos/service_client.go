@@ -159,7 +159,7 @@ func getConfigs(configInfo ConfigRequest) string {
 	data := fmt.Sprintf("?dataId=%s&group=%s&tenant=%s", configInfo.DataId, configInfo.Group, configInfo.Tenant)
 	var url = nacosOpenApiUrl + ConfigsUrl + data
 	val, err := httpGet(url, "")
-	if err == nil {
+	if err != nil {
 		//panic(err)
 		return ""
 	}

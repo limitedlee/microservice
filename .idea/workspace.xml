@@ -18,12 +18,11 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/common/nacos/service_client.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1036">
-                  <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+                <state relative-caret-position="495">
+                  <caret line="161" column="12" selection-start-line="161" selection-start-column="12" selection-end-line="161" selection-end-column="12" />
                   <folding>
                     <element signature="e#15#234#0" expanded="true" />
                     <element signature="n#!!block;n#GetOutboundIp#0" />
-                    <element signature="n#!!block;n#SetConfigs#0" />
                     <element signature="n#!!block;n#HttpPost#0" />
                   </folding>
                 </state>
@@ -586,12 +585,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/common/nacos/service_client.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1036">
-          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+        <state relative-caret-position="495">
+          <caret line="161" column="12" selection-start-line="161" selection-start-column="12" selection-end-line="161" selection-end-column="12" />
           <folding>
             <element signature="e#15#234#0" expanded="true" />
             <element signature="n#!!block;n#GetOutboundIp#0" />
-            <element signature="n#!!block;n#SetConfigs#0" />
             <element signature="n#!!block;n#HttpPost#0" />
           </folding>
         </state>
