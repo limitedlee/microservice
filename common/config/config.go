@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/limitedlee/microservice/common"
-	"google.golang.org/grpc"
 	"log"
 	"os"
 )
@@ -12,12 +11,12 @@ import (
 var client AppconfigClient
 
 func init() {
-	conn, err := grpc.Dial(common.PbConfig.Grpc.Address, grpc.WithInsecure())
-	if err != nil {
-		log.Fatalf("did not connect: %v", err)
-	}
-	//defer conn.Close()
-	client = NewAppconfigClient(conn)
+	//conn, err := grpc.Dial(common.PbConfig.Grpc.Address, grpc.WithInsecure())
+	//if err != nil {
+	//	log.Fatalf("did not connect: %v", err)
+	//}
+	////defer conn.Close()
+	//client = NewAppconfigClient(conn)
 }
 
 //根据key获取配置信息

@@ -8,19 +8,18 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/limitedlee/microservice/common/config"
 	"google.golang.org/grpc"
 )
 
 var logGrpcUrl string
 
 func init() {
-	//获取项目配置中的数据
-	var err error
-	logGrpcUrl, err = config.Get("LogGrpc")
-	if err != nil {
-		log.Printf("get config info fail: %v", err)
-	}
+	////获取项目配置中的数据
+	//var err error
+	//logGrpcUrl, err = config.Get("LogGrpc")
+	//if err != nil {
+	//	log.Printf("get config info fail: %v", err)
+	//}
 }
 func Error(in ...interface{}) {
 	defer func() {

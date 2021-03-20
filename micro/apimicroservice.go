@@ -34,12 +34,10 @@ func (a *ApiMicroService) StartApi(e *echo.Echo, serviceName string, addr string
 		Enable:      true,
 		Healthy:     true,
 		Ephemeral:   true,
-		GroupName:   "DEFAULT_GROUP",
+		GroupName:   "HTTP",
 	})
 	return e.Start(addr)
 }
-
-
 
 func getAddr(addr string) (uint64, string) {
 	baseUrl := ""

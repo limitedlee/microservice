@@ -1,10 +1,5 @@
 package common
 
-import (
-	"github.com/BurntSushi/toml"
-	"log"
-)
-
 var PbConfig SysConfig
 
 type SysConfig struct {
@@ -15,8 +10,8 @@ type SysConfig struct {
 }
 
 func init() {
-	_, err := toml.DecodeFile("appsetting.toml", &PbConfig)
-	if err != nil {
-		log.Fatal(err)
-	}
+	//_, err := toml.DecodeFile("appsetting.toml", &PbConfig)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
 }

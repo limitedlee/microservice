@@ -4,9 +4,6 @@ import (
 	"crypto/rsa"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/limitedlee/microservice/common/config"
-	"io/ioutil"
-	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -20,18 +17,18 @@ var (
 )
 
 func init() {
-	PublicKeyString, err := config.Get("PublicKey")
-	PrivateKeyString, err := config.Get("PrivateKey")
-
-	if err != nil {
-		log.Println(err.Error())
-	}
-
-	publicKeyByte, _ := ioutil.ReadFile(PublicKeyString)
-	privateKeyByte, _ := ioutil.ReadFile(PrivateKeyString)
-
-	PublicKey, _ = jwt.ParseRSAPublicKeyFromPEM(publicKeyByte)
-	PrivateKey, _ = jwt.ParseRSAPrivateKeyFromPEM(privateKeyByte)
+	//PublicKeyString, err := config.Get("PublicKey")
+	//PrivateKeyString, err := config.Get("PrivateKey")
+	//
+	//if err != nil {
+	//	log.Println(err.Error())
+	//}
+	//
+	//publicKeyByte, _ := ioutil.ReadFile(PublicKeyString)
+	//privateKeyByte, _ := ioutil.ReadFile(PrivateKeyString)
+	//
+	//PublicKey, _ = jwt.ParseRSAPublicKeyFromPEM(publicKeyByte)
+	//PrivateKey, _ = jwt.ParseRSAPrivateKeyFromPEM(privateKeyByte)
 }
 
 // getSubFromToken 获取Token的主题（也可以更改获取其他值）
