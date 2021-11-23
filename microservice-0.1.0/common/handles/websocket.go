@@ -32,6 +32,15 @@ func WebSocketHandler(w http.ResponseWriter, r *http.Request) {
 	if wsConn, err = upgrader.Upgrade(w, r, nil); err != nil {
 		return // 获取连接失败直接返回
 	}
+
+	// 新链接进来直接将老的链接关闭
+	oldConnection, ok := WebsocketConns[r.URL.RawQuery]
+	if ok {
+		if oldConnection != nil {
+			oldConnection.Close()
+		}
+	}
+
 	if conn, err = socket.InitConnection(wsConn); err != nil {
 		goto ERR
 	}
