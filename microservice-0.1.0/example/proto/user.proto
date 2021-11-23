@@ -1,0 +1,48 @@
+syntax = "proto3";
+//import "message.proto";
+
+package proto;
+option go_package="proto";
+
+message BaseResponse{
+    int32 Code=1;
+    string Message=2;
+}
+
+message User {
+    int32 Id = 1;   //id
+    string Name = 2; //姓名
+    int32 Age = 3;  //年龄
+    bool Sex = 4;   //性别
+    string Mobile=5;
+    string IdCard=6;
+}
+
+message SearchUserParam {
+    int32 Id = 1;
+    string Mobile=2;
+    string IdCard=3;
+}
+
+message UserAddInfo {
+    string Name = 1;
+    int32 Age = 3;
+    bool Sex = 4;
+}
+
+message UserList{
+    int32 Index=2;
+    int32 PageSize=3;
+    int32 Count=4;
+    repeated  User users=5;
+}
+
+//用户服务
+service UserService {
+    //获取指定用户接口
+    rpc Get (SearchUserParam) returns (User) {}
+    //获取用户列表，分页
+    rpc List (SearchUserParam) returns (UserList){}
+    //添加用户
+    rpc Add(UserAddInfo) returns (BaseResponse){}
+}
