@@ -4,6 +4,7 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/limitedlee/microservice/common/socket"
 	"net/http"
+	"sync"
 )
 
 var (
@@ -18,6 +19,8 @@ var (
 		},
 	}
 	WebsocketConns = map[string]*socket.Connection{}
+
+	WebsocketLock = sync.RWMutex{}
 )
 
 func WebSocketHandler(w http.ResponseWriter, r *http.Request) {
@@ -32,7 +35,10 @@ func WebSocketHandler(w http.ResponseWriter, r *http.Request) {
 	if wsConn, err = upgrader.Upgrade(w, r, nil); err != nil {
 		return // 获取连接失败直接返回
 	}
+
 	// 新链接进来直接关闭旧链接
+	WebsocketLock.Lock()
+
 	oldConnection, ok := WebsocketConns[r.URL.RawQuery]
 	if ok {
 		if oldConnection != nil {
@@ -41,15 +47,19 @@ func WebSocketHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if conn, err = socket.InitConnection(wsConn); err != nil {
+		WebsocketLock.Unlock()
 		goto ERR
 	}
 
 	//未设置连接账号信息
 	if r.URL.RawQuery == "" {
+		WebsocketLock.Unlock()
 		return
 	}
 	//每次都使用个最新的连接池
 	WebsocketConns[r.URL.RawQuery] = conn
+
+	WebsocketLock.Unlock()
 
 	for {
 		if data, err = conn.ReadMessage(); err != nil {
