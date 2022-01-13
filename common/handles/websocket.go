@@ -18,9 +18,8 @@ var (
 			return true
 		},
 	}
-	WebsocketConns = map[string]*socket.Connection{}
 
-	WebsocketLock = sync.RWMutex{}
+	WebsocketConns = sync.Map{}
 )
 
 func WebSocketHandler(w http.ResponseWriter, r *http.Request) {
@@ -37,29 +36,24 @@ func WebSocketHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 新链接进来直接关闭旧链接
-	WebsocketLock.Lock()
-
-	oldConnection, ok := WebsocketConns[r.URL.RawQuery]
+	value, ok := WebsocketConns.Load(r.URL.RawQuery)
 	if ok {
-		if oldConnection != nil {
+		oldConnection, ok := value.(*socket.Connection)
+		if ok && oldConnection != nil {
 			oldConnection.Close()
 		}
 	}
 
 	if conn, err = socket.InitConnection(wsConn); err != nil {
-		WebsocketLock.Unlock()
 		goto ERR
 	}
 
 	//未设置连接账号信息
 	if r.URL.RawQuery == "" {
-		WebsocketLock.Unlock()
 		return
 	}
 	//每次都使用个最新的连接池
-	WebsocketConns[r.URL.RawQuery] = conn
-
-	WebsocketLock.Unlock()
+	WebsocketConns.Store(r.URL.RawQuery, conn)
 
 	for {
 		if data, err = conn.ReadMessage(); err != nil {
@@ -73,5 +67,11 @@ func WebSocketHandler(w http.ResponseWriter, r *http.Request) {
 
 ERR:
 	// 关闭当前连接
-	WebsocketConns[r.URL.RawQuery].Close() //关闭当前连接
+	closeConn, ok := WebsocketConns.Load(r.URL.RawQuery)
+	if ok {
+		oldConnection, ok := closeConn.(*socket.Connection)
+		if ok && oldConnection != nil {
+			oldConnection.Close()
+		}
+	}
 }
