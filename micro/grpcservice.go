@@ -25,8 +25,13 @@ type GrpcService struct {
 	ServiceDiscovery func(dsAddress, namespaceId string)
 }
 
-func (gs *GrpcService) New(opts ...grpc.ServerOption) interface{} {
-	opts = append(opts, grpc.UnaryInterceptor(filter))
+func (gs *GrpcService) New() interface{} {
+	maxSize := 50 * 1024 * 1024
+	opts:=[]grpc.ServerOption{
+		grpc.UnaryInterceptor(filter),
+		grpc.MaxRecvMsgSize(maxSize),
+		grpc.MaxSendMsgSize(maxSize),
+	}
 	gs.Service = grpc.NewServer(opts...)
 	return gs.Service
 }
