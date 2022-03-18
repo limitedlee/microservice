@@ -4,6 +4,11 @@ import (
 	"context"
 	"crypto/rsa"
 	"fmt"
+	"log"
+	"net/http"
+	"runtime/debug"
+	"strings"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/limitedlee/microservice/common/config"
 	"github.com/limitedlee/microservice/common/handles"
@@ -14,10 +19,6 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-	"log"
-	"net/http"
-	"runtime/debug"
-	"strings"
 )
 
 type MicService struct {
@@ -26,7 +27,13 @@ type MicService struct {
 }
 
 func (m *MicService) NewServer() {
-	m.GrpcServer = grpc.NewServer(grpc.UnaryInterceptor(filter))
+	maxSize := 50 * 1024 * 1024
+	opts := []grpc.ServerOption{
+		grpc.UnaryInterceptor(filter),
+		grpc.MaxRecvMsgSize(maxSize),
+		grpc.MaxSendMsgSize(maxSize),
+	}
+	m.GrpcServer = grpc.NewServer(opts...)
 }
 
 func (m *MicService) Start() {
