@@ -4,6 +4,10 @@ import (
 	"context"
 	"crypto/rsa"
 	"fmt"
+	"net/http"
+	"runtime/debug"
+	"strings"
+
 	"github.com/dgrijalva/jwt-go"
 	jw "github.com/limitedlee/microservice/common/jwt"
 	"golang.org/x/net/http2"
@@ -12,9 +16,6 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-	"net/http"
-	"runtime/debug"
-	"strings"
 )
 
 type GrpcService struct {
@@ -24,8 +25,9 @@ type GrpcService struct {
 	ServiceDiscovery func(dsAddress, namespaceId string)
 }
 
-func (gs *GrpcService) New() interface{} {
-	gs.Service = grpc.NewServer(grpc.UnaryInterceptor(filter))
+func (gs *GrpcService) New(opts ...grpc.ServerOption) interface{} {
+	opts = append(opts, grpc.UnaryInterceptor(filter))
+	gs.Service = grpc.NewServer(opts...)
 	return gs.Service
 }
 
